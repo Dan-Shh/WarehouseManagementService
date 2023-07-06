@@ -12,7 +12,7 @@
 2. dotnet build
 3. dotnet run
 4. got to http://localhost:5233/ For Swagger
-5. For postman call http://localhost:5233/api/\_\_\_ for example GET http://localhost:5233/api/Products
+   For postman call http://localhost:5233/api/abc for example GET http://localhost:5233/api/Products
 
 ## Usage
 
