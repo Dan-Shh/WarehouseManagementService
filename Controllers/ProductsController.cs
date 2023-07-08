@@ -25,13 +25,13 @@ namespace WarehouseManagementService.Controllers
         /// Get all the products in the warehouse
         /// </summary>
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Product>>> GetProducts()
+        public async Task<ActionResult<IEnumerable<ProductDTO>>> GetProducts()
         {
           if (_context.Products == null)
           {
               return NotFound();
           }
-            return await _context.Products.ToListAsync();
+            return await _context.Products.Select(x => new ProductDTO(x)).ToListAsync();
         }
 
         // GET: api/Product/5
@@ -63,11 +63,11 @@ namespace WarehouseManagementService.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> PutProduct(long id, Product product)
         {
-            if (id != product.Id)
-            {
-                return BadRequest();
-            }
 
+            if(product.quantity < 0){
+                return ValidationProblem("Quantity Cannot be below 0");
+            }
+            product.Id = id;
             _context.Entry(product).State = EntityState.Modified;
 
             try

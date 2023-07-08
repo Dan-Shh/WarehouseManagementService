@@ -4,10 +4,14 @@ using Swashbuckle.AspNetCore.Annotations;
 
 namespace WarehouseManagementService.Models;
 
-public class Product
+public class ProductDTO
 {
-    [Key]
-    [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+    public ProductDTO(Product p){
+        Id = p.Id;
+        Name = p.Name;
+        Quantity = p.Quantity;
+    }
+
     [SwaggerSchema(ReadOnly = true)]
     public long Id {get; set; }
     [Required]
@@ -15,5 +19,4 @@ public class Product
     [Required]
     public int Quantity { get; set; }
 
-    public string? Notes { get; set; }
 }
