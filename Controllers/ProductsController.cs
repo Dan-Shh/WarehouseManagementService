@@ -64,7 +64,7 @@ namespace WarehouseManagementService.Controllers
         public async Task<IActionResult> PutProduct(long id, Product product)
         {
 
-            if(product.quantity < 0){
+            if(product.Quantity < 0){
                 return ValidationProblem("Quantity Cannot be below 0");
             }
             product.Id = id;
