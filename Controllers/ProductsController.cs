@@ -97,10 +97,15 @@ namespace WarehouseManagementService.Controllers
         [HttpPost]
         public async Task<ActionResult<Product>> PostProduct(Product product)
         {
+
           if (_context.Products == null)
           {
               return Problem("Entity set 'ProductContext.Products'  is null.");
           }
+          
+            if(product.Quantity < 0){
+                return ValidationProblem("Quantity Cannot be below 0");
+            }
             _context.Products.Add(product);
             await _context.SaveChangesAsync();
 
